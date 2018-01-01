@@ -1,0 +1,8 @@
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\bin\x64\Debug\G810 - Minesweeper.exe.config
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\bin\x64\Debug\G810 - Minesweeper.exe
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\bin\x64\Debug\G810 - Minesweeper.pdb
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\obj\x64\Debug\G810___Minesweeper.Form1.resources
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\obj\x64\Debug\G810 - Minesweeper.csproj.GenerateResource.Cache
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\obj\x64\Debug\G810 - Minesweeper.csproj.CoreCompileInputs.cache
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\obj\x64\Debug\G810 - Minesweeper.exe
+C:\Users\Notna\source\repos\G810 - Minesweeper\G810 - Minesweeper\obj\x64\Debug\G810 - Minesweeper.pdb
