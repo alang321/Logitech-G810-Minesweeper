@@ -94,7 +94,6 @@ namespace G810___Minesweeper
             {
                 if (value != "DE" && value != "US")
                 {
-                    Console.WriteLine(value + " kkk");
                     throw new Exception("Only German or Us layout allowed. (DE or US)");
                 }
                 keyboardLayout = value;
