@@ -23,8 +23,10 @@ namespace G810___Minesweeper
         public static void Main()
         {
             bool newFile = false;
-            string[] lines = { "Wins: 0", "Bombs: 13", "Layout: US" };
+            string[] lines = { "Wins: 0", "Bombs: 13", "Layout: DE" };
             string[] US = { "","","","","","5: 30:00", "6: 30:00", "7: 30:00", "8: 30:00", "9: 30:00", "10: 30:00", "11: 30:00", "12: 30:00", "13: 30:00", "14: 30:00", "15: 30:00", "16: 30:00", "17: 30:00", "18: 30:00", "19: 30:00", "20: 30:00", "21: 30:00", "22: 30:00", "23: 30:00", "24: 30:00", "25: 30:00" };
+            string[] colors = { "000,000,000","255,150,000","100,200,000","000,255,070","000,255,255","000,127,255","000,000,255","000,000,255","255,255,255","255,200,200","255,000,255","255,000,000","000,000,255","000,255,255","255,160,160"};
+
 
             var handle = GetConsoleWindow();
 
@@ -37,6 +39,7 @@ namespace G810___Minesweeper
             var file = Path.Combine(systemPath, "G810 Minesweeper/config.txt");
             var fileUS = Path.Combine(systemPath, "G810 Minesweeper/US.txt");
             var fileDE = Path.Combine(systemPath, "G810 Minesweeper/DE.txt");
+            var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
             Directory.CreateDirectory(directory);
 
@@ -51,6 +54,24 @@ namespace G810___Minesweeper
             if (!File.Exists(fileDE))
             {
                 File.WriteAllLines(fileDE, US);
+            }
+            if (!File.Exists(fileColors))
+            {
+                File.WriteAllLines(fileColors, colors);
+            }
+
+            try
+            {
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                        MineSweeper.colors[i, 0] = Convert.ToByte(File.ReadLines(fileColors).Skip(i).Take(1).First().Substring(0,3));
+                        MineSweeper.colors[i, 1] = Convert.ToByte(File.ReadLines(fileColors).Skip(i).Take(1).First().Substring(4, 3));
+                        MineSweeper.colors[i, 2] = Convert.ToByte(File.ReadLines(fileColors).Skip(i).Take(1).First().Substring(8, 3));
+                }
+            }
+            catch
+            {
+                File.WriteAllLines(fileColors, colors);
             }
 
 
@@ -80,7 +101,7 @@ namespace G810___Minesweeper
                 {
                     wins = 0;
                     bombs = 13;
-                    layout = "US";
+                    layout = "DE";
                     File.WriteAllLines(file, lines);
                     newFile = true;
                 }
@@ -95,7 +116,7 @@ namespace G810___Minesweeper
                         }
                         else
                         {
-                            layout = "US";
+                            layout = "DE";
                             File.WriteAllLines(file, lines);
                             newFile = true;
                         }
@@ -111,6 +132,9 @@ namespace G810___Minesweeper
             }
             else
             {
+                wins = 0;
+                bombs = 13;
+                layout = "DE";
                 File.WriteAllLines(file, lines);
                 newFile = true;
             }
@@ -174,13 +198,6 @@ namespace G810___Minesweeper
 
                     }
                 }
-                //else if(key == "Pause")
-                //{
-                //    test.Wins = 0;
-                //}
-                //StreamWriter sw = new StreamWriter(Application.StartupPath + @"\log.txt", true);
-                //sw.Write((Keys)vkCode);
-                //sw.Close();
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }

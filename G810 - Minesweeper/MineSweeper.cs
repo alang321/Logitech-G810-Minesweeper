@@ -23,7 +23,8 @@ namespace G810___Minesweeper
         static bool gameRunning;
         static bool firstMove = true;
         static string keyboardLayout = "US";
-        static byte[,] colors =
+        static bool setBackground = false;
+        public static byte[,] colors =
             {
                 // Bomben in der Umgebung
                 {000,000,000},  //0
@@ -46,20 +47,23 @@ namespace G810___Minesweeper
                 //Flag
                 {255,000,255},   //10
 
-                //New Game
+                //New Game Key
                 {255,000,000},   //11
 
-                //score
-                {000,255,255},    //12
+                //Game Lost background
+                {000,000,255},   //12
 
-                //Reset score
-                {000,127,255}    //13
+                //Game Won background
+                {000,255,255},   //13
+
+                //New Game background
+                {255,160,160},   //14
         };
 
         static MineSweeper()
         {
             //Initialisiert die SDK
-            if (!LogitechGSDK.LogiLedInit()) Console.Write("Not connected to GSDK");
+            if (!LogitechGSDK.LogiLedInit())Console.Write("Not connected to GSDK");
 
             newGame();
         }
@@ -90,6 +94,7 @@ namespace G810___Minesweeper
             {
                 if (value != "DE" && value != "US")
                 {
+                    Console.WriteLine(value + " kkk");
                     throw new Exception("Only German or Us layout allowed. (DE or US)");
                 }
                 keyboardLayout = value;
@@ -135,19 +140,21 @@ namespace G810___Minesweeper
             {
                 covered = 44;
             }
+
             firstMove = true;
             genBombs();
 
             genMap();
             isFlag = new bool[13, 6];
 
-            colors[9, 0] = 255;
-            colors[9, 1] = 160;
-            colors[9, 2] = 160;
+            colors[9, 0] = colors[14, 0];
+            colors[9, 1] = colors[14, 1];
+            colors[9, 2] = colors[14, 2];
             gameRunning = true;
 
-
             Thread.Sleep(100);
+
+            setBackground = true;
             printLogiLED();
         }
 
@@ -366,20 +373,7 @@ namespace G810___Minesweeper
         {
             byte[] logiLED = new byte[LogitechGSDK.LOGI_LED_BITMAP_SIZE];
 
-
-            LogitechGSDK.LogiLedSetLighting(64, 64, 100);
-
-            //victory
-            if (colors[9,1] == 255)
-            {
-                LogitechGSDK.LogiLedSetLighting(100, 100, 000);
-            }
-            //defeat
-            else if (colors[9, 1] == 000)
-            {
-                LogitechGSDK.LogiLedSetLighting(100, 000, 000);
-            }
-
+            
             for (int i = 0; i < display.GetLength(1); i++)
             {
                 for (int j = 0; j < display.GetLength(0); j++)
@@ -418,6 +412,11 @@ namespace G810___Minesweeper
                 colorToByte(logiLED, i * 4 + 4, colors[12,0], colors[12, 1], colors[12, 2]);
             }*/
 
+            if (setBackground)
+            {
+                setBackground = false;
+                LogitechGSDK.LogiLedSetLighting(Convert.ToInt32((Convert.ToDouble(colors[9, 2]) / 255.0) * 100), Convert.ToInt32((Convert.ToDouble(colors[9, 1]) / 255.0) * 100), Convert.ToInt32((Convert.ToDouble(colors[9, 0]) / 255.0) * 100));
+            }
             LogitechGSDK.LogiLedSetLightingFromBitmap(logiLED);
         }
 
@@ -454,9 +453,9 @@ namespace G810___Minesweeper
             }
             if (m == 7)
             {
-                colors[9, 0] = 000;
-                colors[9, 1] = 000;
-                colors[9, 2] = 255;
+                colors[9, 0] = colors[12, 0];
+                colors[9, 1] = colors[12, 1];
+                colors[9, 2] = colors[12, 2];
 
                 //stop timer defeat
                 var principalForm = Application.OpenForms.OfType<Form1>().Single();
@@ -571,6 +570,8 @@ namespace G810___Minesweeper
 
                 }
             }
+
+            setBackground = true;
             printLogiLED();
 
             gameRunning = false;
@@ -584,9 +585,9 @@ namespace G810___Minesweeper
             principalForm.UpdateDisplay();
             principalForm.StopWatchVictory();
             
-            colors[9, 0] = 000;
-            colors[9, 1] = 255;
-            colors[9, 2] = 255;
+            colors[9, 0] = colors[13, 0];
+            colors[9, 1] = colors[13, 1];
+            colors[9, 2] = colors[13, 2];
 
             var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             string[] lines = { "Wins: " + wins, "Bombs: " + bombs, "Layout: " + keyboardLayout };

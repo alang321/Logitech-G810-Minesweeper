@@ -51,11 +51,10 @@ namespace G810___Minesweeper
             // Set the MaximizeBox to false to remove the maximize box.
             MaximizeBox = false;
 
-            // Set the MinimizeBox to false to remove the minimize box.
-            MinimizeBox = false;
-
             // Set the start position of the form to the center of the screen.
             StartPosition = FormStartPosition.CenterScreen;
+
+            UpdateColors();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -108,7 +107,7 @@ namespace G810___Minesweeper
                 {
                     File.WriteAllLines(fileUS, US);
                 }
-                if (best.Length != 5 || best.Substring(2, 1) != ":")
+                if (best.Length != 5 || best.Substring(2, 1) != ":" || Convert.ToInt32(best.Substring(0, 2)) > 30 || Convert.ToInt32(best.Substring(3, 2)) > 60 || Convert.ToInt32(best.Substring(0, 2)) < 0 || Convert.ToInt32(best.Substring(3, 2)) < 0)
                 {
                     File.WriteAllLines(fileUS, US);
                 }
@@ -128,7 +127,7 @@ namespace G810___Minesweeper
                 {
                     File.WriteAllLines(fileDE, US);
                 }
-                if (best.Length != 5 || best.Substring(2, 1) != ":")
+                if (best.Length != 5 || best.Substring(2, 1) != ":" || Convert.ToInt32(best.Substring(0, 2)) > 30 || Convert.ToInt32(best.Substring(3, 2)) > 60 || Convert.ToInt32(best.Substring(0, 2)) < 0 || Convert.ToInt32(best.Substring(3, 2)) < 0)
                 {
                     File.WriteAllLines(fileDE, US);
                 }
@@ -306,8 +305,9 @@ namespace G810___Minesweeper
             MessageBoxButtons.YesNo, MessageBoxIcon.Question,
             MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
             {
-                string[] lines = { "Wins: 0", "Bombs: 13", "Layout: US" };
+                string[] lines = { "Wins: 0", "Bombs: 13", "Layout: DE" };
                 string[] US = { "", "", "", "", "", "5: 30:00", "6: 30:00", "7: 30:00", "8: 30:00", "9: 30:00", "10: 30:00", "11: 30:00", "12: 30:00", "13: 30:00", "14: 30:00", "15: 30:00", "16: 30:00", "17: 30:00", "18: 30:00", "19: 30:00", "20: 30:00", "21: 30:00", "22: 30:00", "23: 30:00", "24: 30:00", "25: 30:00" };
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
 
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var directory = Path.Combine(systemPath, "G810 Minesweeper");
@@ -315,16 +315,22 @@ namespace G810___Minesweeper
                 var file = Path.Combine(systemPath, "G810 Minesweeper/config.txt");
                 var fileUS = Path.Combine(systemPath, "G810 Minesweeper/US.txt");
                 var fileDE = Path.Combine(systemPath, "G810 Minesweeper/DE.txt");
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
                 File.WriteAllLines(file, lines);
                 File.WriteAllLines(fileUS, US);
                 File.WriteAllLines(fileDE, US);
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.colors = new byte[,]{{000,000,000},{255,150,000},{100,200,000},{000,255,070},{000,255,255},{000,127,255},{000,000,255},{000,000,255},{255,255,255},{255,200,200},{255,000,255},{255,000,000},{000,000,255},{000,255,255},{255,160,160},};
+
+                UpdateColors();
 
                 MineSweeper.Wins = 0;
                 MineSweeper.Bombs = 13;
-                MineSweeper.KeyboardLayout = "US";
+                MineSweeper.KeyboardLayout = "DE";
 
-                comboBox1.SelectedIndex = 1;
+                comboBox1.SelectedIndex = 0;
                 numericUpDown1.Value = 13;
                 label3.Text = MineSweeper.Wins.ToString();
 
@@ -332,6 +338,468 @@ namespace G810___Minesweeper
 
                 StopWatchDefeat();
                 ResetWatch();
+            }
+        }
+
+        private void UpdateColors()
+        {
+            b0.BackColor = Color.FromArgb(MineSweeper.colors[0, 2], MineSweeper.colors[0, 1], MineSweeper.colors[0, 0]);
+            b1.BackColor = Color.FromArgb(MineSweeper.colors[1, 2], MineSweeper.colors[1, 1], MineSweeper.colors[1, 0]);
+            b2.BackColor = Color.FromArgb(MineSweeper.colors[2, 2], MineSweeper.colors[2, 1], MineSweeper.colors[2, 0]);
+            b3.BackColor = Color.FromArgb(MineSweeper.colors[3, 2], MineSweeper.colors[3, 1], MineSweeper.colors[3, 0]);
+            b4.BackColor = Color.FromArgb(MineSweeper.colors[4, 2], MineSweeper.colors[4, 1], MineSweeper.colors[4, 0]);
+            b5.BackColor = Color.FromArgb(MineSweeper.colors[5, 2], MineSweeper.colors[5, 1], MineSweeper.colors[5, 0]);
+            b6.BackColor = Color.FromArgb(MineSweeper.colors[6, 2], MineSweeper.colors[6, 1], MineSweeper.colors[6, 0]);
+
+
+            bBomb.BackColor = Color.FromArgb(MineSweeper.colors[7, 2], MineSweeper.colors[7, 1], MineSweeper.colors[7, 0]);
+            bClear.BackColor = Color.FromArgb(MineSweeper.colors[8, 2], MineSweeper.colors[8, 1], MineSweeper.colors[8, 0]);
+            bFlag.BackColor = Color.FromArgb(MineSweeper.colors[10, 2], MineSweeper.colors[10, 1], MineSweeper.colors[10, 0]);
+            bNew.BackColor = Color.FromArgb(MineSweeper.colors[11, 2], MineSweeper.colors[11, 1], MineSweeper.colors[11, 0]);
+            bDefeat.BackColor = Color.FromArgb(MineSweeper.colors[12, 2], MineSweeper.colors[12, 1], MineSweeper.colors[12, 0]);
+            bWin.BackColor = Color.FromArgb(MineSweeper.colors[13, 2], MineSweeper.colors[13, 1], MineSweeper.colors[13, 0]);
+            bDefault.BackColor = Color.FromArgb(MineSweeper.colors[14, 2], MineSweeper.colors[14, 1], MineSweeper.colors[14, 0]);
+        }
+
+        private void b0_Click(object sender, EventArgs e)
+        {
+            int index = 0;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b1_Click(object sender, EventArgs e)
+        {
+            int index = 1;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b2_Click(object sender, EventArgs e)
+        {
+            int index = 2;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b3_Click(object sender, EventArgs e)
+        {
+            int index = 3;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b4_Click(object sender, EventArgs e)
+        {
+            int index = 4;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b5_Click(object sender, EventArgs e)
+        {
+            int index = 5;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void b6_Click(object sender, EventArgs e)
+        {
+            int index = 6;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bWin_Click(object sender, EventArgs e)
+        {
+            int index = 13;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bDefeat_Click(object sender, EventArgs e)
+        {
+            int index = 12;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bFlag_Click(object sender, EventArgs e)
+        {
+            int index = 10;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bBomb_Click(object sender, EventArgs e)
+        {
+            int index = 7;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bClear_Click(object sender, EventArgs e)
+        {
+            int index = 8;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bNew_Click(object sender, EventArgs e)
+        {
+            int index = 11;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
             }
         }
     }
