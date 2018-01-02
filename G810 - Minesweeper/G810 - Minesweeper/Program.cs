@@ -101,7 +101,7 @@ namespace G810___Minesweeper
                 {
                     wins = 0;
                     bombs = 13;
-                    layout = "US";
+                    layout = "DE";
                     File.WriteAllLines(file, lines);
                     newFile = true;
                 }
@@ -116,7 +116,7 @@ namespace G810___Minesweeper
                         }
                         else
                         {
-                            layout = "US";
+                            layout = "DE";
                             File.WriteAllLines(file, lines);
                             newFile = true;
                         }
@@ -132,6 +132,9 @@ namespace G810___Minesweeper
             }
             else
             {
+                wins = 0;
+                bombs = 13;
+                layout = "DE";
                 File.WriteAllLines(file, lines);
                 newFile = true;
             }
