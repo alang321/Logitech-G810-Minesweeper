@@ -444,7 +444,7 @@ namespace G810___Minesweeper
                 //damit man gleich nach aufdecken theoretisch flaggen kann
                 InterceptKeys.last = "empty";
 
-                if (--covered <= bombs)
+                if (--covered <= bombs && m != 7)
                 {
                     victory();
                     return;

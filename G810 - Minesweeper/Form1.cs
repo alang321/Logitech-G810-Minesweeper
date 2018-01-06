@@ -218,7 +218,7 @@ namespace G810___Minesweeper
             {
                 for(int i = 0; i < 26; i++)
                 {
-                    if(i <= 5)
+                    if(i < 5)
                     {
                         file[i] = "";
                     }
