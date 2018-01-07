@@ -122,9 +122,9 @@ namespace G810___Minesweeper
             // 
             // resetWins
             // 
-            this.resetWins.Location = new System.Drawing.Point(98, 74);
+            this.resetWins.Location = new System.Drawing.Point(99, 74);
             this.resetWins.Name = "resetWins";
-            this.resetWins.Size = new System.Drawing.Size(75, 23);
+            this.resetWins.Size = new System.Drawing.Size(78, 23);
             this.resetWins.TabIndex = 18;
             this.resetWins.Text = "Reset Wins";
             this.resetWins.UseVisualStyleBackColor = true;
@@ -132,9 +132,9 @@ namespace G810___Minesweeper
             // 
             // resetColors
             // 
-            this.resetColors.Location = new System.Drawing.Point(17, 74);
+            this.resetColors.Location = new System.Drawing.Point(15, 74);
             this.resetColors.Name = "resetColors";
-            this.resetColors.Size = new System.Drawing.Size(75, 23);
+            this.resetColors.Size = new System.Drawing.Size(78, 23);
             this.resetColors.TabIndex = 17;
             this.resetColors.Text = "Reset Colors";
             this.resetColors.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@ namespace G810___Minesweeper
             // 
             // resetTimes
             // 
-            this.resetTimes.Location = new System.Drawing.Point(179, 74);
+            this.resetTimes.Location = new System.Drawing.Point(183, 74);
             this.resetTimes.Name = "resetTimes";
-            this.resetTimes.Size = new System.Drawing.Size(75, 23);
+            this.resetTimes.Size = new System.Drawing.Size(78, 23);
             this.resetTimes.TabIndex = 16;
             this.resetTimes.Text = "Reset Times";
             this.resetTimes.UseVisualStyleBackColor = true;
@@ -152,9 +152,9 @@ namespace G810___Minesweeper
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(98, 118);
+            this.button4.Location = new System.Drawing.Point(99, 118);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(78, 23);
             this.button4.TabIndex = 15;
             this.button4.Text = "Reset";
             this.button4.UseVisualStyleBackColor = true;
