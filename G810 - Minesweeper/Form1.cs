@@ -301,13 +301,13 @@ namespace G810___Minesweeper
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if ((MessageBox.Show("Are you sure you want to Reset. All wins and best times will be lost.", "Reset",
+            if ((MessageBox.Show("Are you sure you want to Reset. All wins, colors and best times will be lost.", "Reset",
             MessageBoxButtons.YesNo, MessageBoxIcon.Question,
             MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
             {
                 string[] lines = { "Wins: 0", "Bombs: 13", "Layout: DE" };
                 string[] US = { "", "", "", "", "", "5: 30:00", "6: 30:00", "7: 30:00", "8: 30:00", "9: 30:00", "10: 30:00", "11: 30:00", "12: 30:00", "13: 30:00", "14: 30:00", "15: 30:00", "16: 30:00", "17: 30:00", "18: 30:00", "19: 30:00", "20: 30:00", "21: 30:00", "22: 30:00", "23: 30:00", "24: 30:00", "25: 30:00" };
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
 
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var directory = Path.Combine(systemPath, "G810 Minesweeper");
@@ -322,7 +322,7 @@ namespace G810___Minesweeper
                 File.WriteAllLines(fileDE, US);
                 File.WriteAllLines(fileColors, colors);
 
-                MineSweeper.colors = new byte[,]{{000,000,000},{255,150,000},{100,200,000},{000,255,070},{000,255,255},{000,127,255},{000,000,255},{000,000,255},{255,255,255},{255,200,200},{255,000,255},{255,000,000},{000,000,255},{000,255,255},{255,160,160},};
+                MineSweeper.colors = new byte[,]{ { 000, 000, 000 }, { 128, 000, 128 }, { 255, 255, 000 }, { 000, 128, 000 }, { 000, 255, 255 }, { 000, 127, 255 }, { 000, 000, 255 }, { 000, 000, 255 }, { 255, 255, 255 }, { 255, 200, 200 }, { 255, 000, 255 }, { 255, 000, 000 }, { 000, 000, 255 }, { 000, 255, 255 }, { 255, 160, 160 } };
 
                 UpdateColors();
 
@@ -330,6 +330,7 @@ namespace G810___Minesweeper
                 MineSweeper.Bombs = 13;
                 MineSweeper.KeyboardLayout = "DE";
 
+                label5.Text = "30:00";
                 comboBox1.SelectedIndex = 0;
                 numericUpDown1.Value = 13;
                 label3.Text = MineSweeper.Wins.ToString();
@@ -373,7 +374,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -407,7 +408,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -441,7 +442,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -475,7 +476,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -509,7 +510,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -543,7 +544,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -577,7 +578,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -611,7 +612,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -645,7 +646,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -679,7 +680,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -713,7 +714,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -747,7 +748,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -781,7 +782,7 @@ namespace G810___Minesweeper
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
 
-                string[] colors = { "000,000,000", "255,150,000", "100,200,000", "000,255,070", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
                 var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                 var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
 
@@ -798,6 +799,118 @@ namespace G810___Minesweeper
                 colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
 
                 File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void bDefault_Click(object sender, EventArgs e)
+        {
+            int index = 14;
+
+            // Show the color dialog.
+            ColorDialog MyDialog = new ColorDialog();
+
+            MyDialog.Color = Color.FromArgb(MineSweeper.colors[index, 2], MineSweeper.colors[index, 1], MineSweeper.colors[index, 0]);
+            // See if user pressed ok.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                for (int i = 0; i < MineSweeper.colors.GetLength(0); i++)
+                {
+                    colors[i] = File.ReadLines(fileColors).Skip(i).Take(1).First();
+                }
+
+                ((Button)sender).BackColor = MyDialog.Color;
+                MineSweeper.colors[index, 0] = MyDialog.Color.B;
+                MineSweeper.colors[index, 1] = MyDialog.Color.G;
+                MineSweeper.colors[index, 2] = MyDialog.Color.R;
+
+                colors[index] = MyDialog.Color.B.ToString().PadLeft(3, '0') + "," + MyDialog.Color.G.ToString().PadLeft(3, '0') + "," + MyDialog.Color.R.ToString().PadLeft(3, '0'); ;
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void resetColors_Click(object sender, EventArgs e)
+        {
+            if ((MessageBox.Show("Are you sure you want to Reset. All colors will be lost.", "Reset",
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+           MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                string[] colors = { "000,000,000", "128,000,128", "255,255,000", "000,128,000", "000,255,255", "000,127,255", "000,000,255", "000,000,255", "255,255,255", "255,200,200", "255,000,255", "255,000,000", "000,000,255", "000,255,255", "255,160,160" };
+
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var directory = Path.Combine(systemPath, "G810 Minesweeper");
+
+                var fileColors = Path.Combine(systemPath, "G810 Minesweeper/colors.txt");
+
+                File.WriteAllLines(fileColors, colors);
+
+                MineSweeper.colors = new byte[,] { { 000, 000, 000 }, { 128, 000, 128 }, { 255, 255, 000 }, { 000, 128, 000 }, { 000, 255, 255 }, { 000, 127, 255 }, { 000, 000, 255 }, { 000, 000, 255 }, { 255, 255, 255 }, { 255, 200, 200 }, { 255, 000, 255 }, { 255, 000, 000 }, { 000, 000, 255 }, { 000, 255, 255 }, { 255, 160, 160 }, };
+
+                UpdateColors();
+
+                StopWatchDefeat();
+                ResetWatch();
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void resetWins_Click(object sender, EventArgs e)
+        {
+            if ((MessageBox.Show("Are you sure you want to Reset. All wins will be lost.", "Reset",
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+           MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                string[] lines = { "Wins: 0", "Bombs: " + MineSweeper.Bombs, "Layout: " + MineSweeper.KeyboardLayout };
+
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var directory = Path.Combine(systemPath, "G810 Minesweeper");
+
+                var file = Path.Combine(systemPath, "G810 Minesweeper/config.txt");
+
+                File.WriteAllLines(file, lines);
+
+                MineSweeper.Wins = 0;
+
+                label3.Text = MineSweeper.Wins.ToString();
+
+                StopWatchDefeat();
+                ResetWatch();
+
+                MineSweeper.newGame();
+            }
+        }
+
+        private void resetTimes_Click(object sender, EventArgs e)
+        {
+            if ((MessageBox.Show("Are you sure you want to Reset. All best times will be lost.", "Reset",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+            MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes))
+            {
+                string[] US = { "", "", "", "", "", "5: 30:00", "6: 30:00", "7: 30:00", "8: 30:00", "9: 30:00", "10: 30:00", "11: 30:00", "12: 30:00", "13: 30:00", "14: 30:00", "15: 30:00", "16: 30:00", "17: 30:00", "18: 30:00", "19: 30:00", "20: 30:00", "21: 30:00", "22: 30:00", "23: 30:00", "24: 30:00", "25: 30:00" };
+                
+                var systemPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                var directory = Path.Combine(systemPath, "G810 Minesweeper");
+
+                var fileUS = Path.Combine(systemPath, "G810 Minesweeper/US.txt");
+                var fileDE = Path.Combine(systemPath, "G810 Minesweeper/DE.txt");
+
+                File.WriteAllLines(fileUS, US);
+                File.WriteAllLines(fileDE, US);
+
+                label5.Text = "30:00";
+
+                StopWatchDefeat();
+                ResetWatch();
 
                 MineSweeper.newGame();
             }

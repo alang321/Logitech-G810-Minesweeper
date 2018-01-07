@@ -36,6 +36,9 @@ namespace G810___Minesweeper
             this.label6 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.resetWins = new System.Windows.Forms.Button();
+            this.resetColors = new System.Windows.Forms.Button();
+            this.resetTimes = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
@@ -106,6 +109,9 @@ namespace G810___Minesweeper
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.resetWins);
+            this.tabPage4.Controls.Add(this.resetColors);
+            this.tabPage4.Controls.Add(this.resetTimes);
             this.tabPage4.Controls.Add(this.button4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -114,9 +120,39 @@ namespace G810___Minesweeper
             this.tabPage4.Text = "Reset";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // resetWins
+            // 
+            this.resetWins.Location = new System.Drawing.Point(98, 74);
+            this.resetWins.Name = "resetWins";
+            this.resetWins.Size = new System.Drawing.Size(75, 23);
+            this.resetWins.TabIndex = 18;
+            this.resetWins.Text = "Reset Wins";
+            this.resetWins.UseVisualStyleBackColor = true;
+            this.resetWins.Click += new System.EventHandler(this.resetWins_Click);
+            // 
+            // resetColors
+            // 
+            this.resetColors.Location = new System.Drawing.Point(17, 74);
+            this.resetColors.Name = "resetColors";
+            this.resetColors.Size = new System.Drawing.Size(75, 23);
+            this.resetColors.TabIndex = 17;
+            this.resetColors.Text = "Reset Colors";
+            this.resetColors.UseVisualStyleBackColor = true;
+            this.resetColors.Click += new System.EventHandler(this.resetColors_Click);
+            // 
+            // resetTimes
+            // 
+            this.resetTimes.Location = new System.Drawing.Point(179, 74);
+            this.resetTimes.Name = "resetTimes";
+            this.resetTimes.Size = new System.Drawing.Size(75, 23);
+            this.resetTimes.TabIndex = 16;
+            this.resetTimes.Text = "Reset Times";
+            this.resetTimes.UseVisualStyleBackColor = true;
+            this.resetTimes.Click += new System.EventHandler(this.resetTimes_Click);
+            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(98, 96);
+            this.button4.Location = new System.Drawing.Point(98, 118);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 15;
@@ -172,6 +208,7 @@ namespace G810___Minesweeper
             // 
             // bNew
             // 
+            this.bNew.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bNew.Location = new System.Drawing.Point(231, 187);
             this.bNew.Name = "bNew";
             this.bNew.Size = new System.Drawing.Size(23, 23);
@@ -190,6 +227,7 @@ namespace G810___Minesweeper
             // 
             // b6
             // 
+            this.b6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b6.Location = new System.Drawing.Point(62, 187);
             this.b6.Name = "b6";
             this.b6.Size = new System.Drawing.Size(23, 23);
@@ -208,6 +246,7 @@ namespace G810___Minesweeper
             // 
             // b5
             // 
+            this.b5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b5.Location = new System.Drawing.Point(62, 157);
             this.b5.Name = "b5";
             this.b5.Size = new System.Drawing.Size(23, 23);
@@ -226,6 +265,7 @@ namespace G810___Minesweeper
             // 
             // b4
             // 
+            this.b4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b4.Location = new System.Drawing.Point(62, 127);
             this.b4.Name = "b4";
             this.b4.Size = new System.Drawing.Size(23, 23);
@@ -244,6 +284,7 @@ namespace G810___Minesweeper
             // 
             // b3
             // 
+            this.b3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b3.Location = new System.Drawing.Point(62, 97);
             this.b3.Name = "b3";
             this.b3.Size = new System.Drawing.Size(23, 23);
@@ -262,6 +303,7 @@ namespace G810___Minesweeper
             // 
             // b2
             // 
+            this.b2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b2.Location = new System.Drawing.Point(62, 66);
             this.b2.Name = "b2";
             this.b2.Size = new System.Drawing.Size(23, 23);
@@ -280,6 +322,7 @@ namespace G810___Minesweeper
             // 
             // b1
             // 
+            this.b1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.b1.Location = new System.Drawing.Point(62, 36);
             this.b1.Name = "b1";
             this.b1.Size = new System.Drawing.Size(23, 23);
@@ -298,11 +341,13 @@ namespace G810___Minesweeper
             // 
             // b0
             // 
+            this.b0.BackColor = System.Drawing.Color.Transparent;
+            this.b0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b0.Location = new System.Drawing.Point(62, 6);
             this.b0.Name = "b0";
             this.b0.Size = new System.Drawing.Size(23, 23);
             this.b0.TabIndex = 14;
-            this.b0.UseVisualStyleBackColor = true;
+            this.b0.UseVisualStyleBackColor = false;
             this.b0.Click += new System.EventHandler(this.b0_Click);
             // 
             // label11
@@ -316,6 +361,7 @@ namespace G810___Minesweeper
             // 
             // bClear
             // 
+            this.bClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bClear.Location = new System.Drawing.Point(231, 157);
             this.bClear.Name = "bClear";
             this.bClear.Size = new System.Drawing.Size(23, 23);
@@ -334,6 +380,7 @@ namespace G810___Minesweeper
             // 
             // bBomb
             // 
+            this.bBomb.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bBomb.Location = new System.Drawing.Point(231, 127);
             this.bBomb.Name = "bBomb";
             this.bBomb.Size = new System.Drawing.Size(23, 23);
@@ -352,6 +399,7 @@ namespace G810___Minesweeper
             // 
             // bFlag
             // 
+            this.bFlag.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bFlag.Location = new System.Drawing.Point(231, 97);
             this.bFlag.Name = "bFlag";
             this.bFlag.Size = new System.Drawing.Size(23, 23);
@@ -370,6 +418,7 @@ namespace G810___Minesweeper
             // 
             // bDefeat
             // 
+            this.bDefeat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bDefeat.Location = new System.Drawing.Point(231, 66);
             this.bDefeat.Name = "bDefeat";
             this.bDefeat.Size = new System.Drawing.Size(23, 23);
@@ -388,6 +437,7 @@ namespace G810___Minesweeper
             // 
             // bWin
             // 
+            this.bWin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bWin.Location = new System.Drawing.Point(231, 36);
             this.bWin.Name = "bWin";
             this.bWin.Size = new System.Drawing.Size(23, 23);
@@ -406,11 +456,13 @@ namespace G810___Minesweeper
             // 
             // bDefault
             // 
+            this.bDefault.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bDefault.Location = new System.Drawing.Point(231, 6);
             this.bDefault.Name = "bDefault";
             this.bDefault.Size = new System.Drawing.Size(23, 23);
             this.bDefault.TabIndex = 0;
             this.bDefault.UseVisualStyleBackColor = true;
+            this.bDefault.Click += new System.EventHandler(this.bDefault_Click);
             // 
             // tabPage1
             // 
@@ -645,5 +697,8 @@ namespace G810___Minesweeper
         private Button b0;
         private Label label14;
         private Button bNew;
+        private Button resetWins;
+        private Button resetColors;
+        private Button resetTimes;
     }
 }
